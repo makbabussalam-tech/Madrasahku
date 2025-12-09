@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem PMB - MA Kejuruan Basus Salam</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Noto Sans', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a5f7a;
+            --secondary: #57cc99;
+            --accent: #ff9a3c;
+            --light: #f7f9fc;
+            --dark: #2d3748;
+            --danger: #e63946;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header dan Navigasi */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a8ca7 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            background-color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.8rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .logo-text p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background: linear-gradient(rgba(26, 95, 122, 0.9), rgba(26, 95, 122, 0.9)), url('https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1632&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:hover {
+            background-color: #46b883;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #ff8a1c;
+        }
+        
+        /* Section Umum */
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Fitur PMB */
+        .features {
+            background-color: white;
+        }
+        
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 5px solid var(--primary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(87, 204, 153, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--secondary);
+            font-size: 2rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Form Pendaftaran */
+        .registration-form {
+            background-color: var(--light);
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .form-header h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .required:after {
+            content: ' *';
+            color: var(--danger);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(87, 204, 153, 0.2);
+        }
+        
+        .form-note {
+            background-color: rgba(255, 154, 60, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        
+        /* Jadwal PMB */
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 3rem auto 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--secondary);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: calc(50% - 40px);
+        }
+        
+        .timeline-date {
+            position: absolute;
+            top: 0;
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            box-shadow: 0 0 0 6px #f5f7fa;
+        }
+        
+        .timeline-date .month {
+            font-size: 0.8rem;
+        }
+        
+        .timeline-date .day {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Tracking Section */
+        .tracking-section {
+            background-color: white;
+        }
+        
+        .tracking-box {
+            background-color: var(--light);
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .tracking-input {
+            display: flex;
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        
+        .tracking-input input {
+            border-radius: 30px 0 0 30px;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-right: none;
+        }
+        
+        .tracking-input button {
+            border-radius: 0 30px 30px 0;
+            padding: 0 25px;
+        }
+        
+        .status-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+            text-align: left;
+        }
+        
+        .status-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .badge-pending {
+            background-color: rgba(244, 162, 97, 0.2);
+            color: var(--warning);
+        }
+        
+        .badge-verified {
+            background-color: rgba(42, 157, 143, 0.2);
+            color: var(--success);
+        }
+        
+        .badge-accepted {
+            background-color: rgba(87, 204, 153, 0.2);
+            color: var(--secondary);
+        }
+        
+        /* Admin Panel */
+        .admin-section {
+            background-color: var(--light);
+        }
+        
+        .admin-login {
+            background-color: white;
+            border-radius: 15px;
+            padding: 3rem;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .admin-table {
+            display: none;
+            margin-top: 3rem;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+        
+        .btn-verify {
+            background-color: rgba(42, 157, 143, 0.1);
+            color: var(--success);
+        }
+        
+        .btn-detail {
+            background-color: rgba(26, 95, 122, 0.1);
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+        
+        .footer-logo h2 {
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info {
+            margin-top: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-item i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        .footer-links h3, .footer-social h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsif */
+        @media (max-width: 992px) {
+            .timeline:before {
+                left: 30px;
+            }
+            
+            .timeline-item {
+                flex-direction: row !important;
+                margin-left: 60px;
+            }
+            
+            .timeline-content {
+                width: 100%;
+            }
+            
+            .timeline-date {
+                left: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 1rem;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline:before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                margin-left: 50px;
+            }
+            
+            .timeline-date {
+                left: 20px;
+                width: 60px;
+                height: 60px;
+            }
+            
+            .timeline-date .day {
+                font-size: 1.2rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-mosque"></i>
+                    </div>
+                    <div class="logo-text">
+                        <h1>MA Kejuruan Babus Salam</h1>
+                        <p>Sistem Penerimaan Murid Baru</p>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" class="active">Beranda</a></li>
+                    <li><a href="#pendaftaran">Pendaftaran</a></li>
+                    <li><a href="#persyaratan">Persyaratan</a></li>
+                    <li><a href="#jadwal">Jadwal</a></li>
+                    <li><a href="#tracking">Tracking</a></li>
+                    <li><a href="#admin">Admin</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Penerimaan Murid Baru Tahun Ajaran 2026/2027</h2>
+            <p>Mencetak Generasi Santripreuner Modern, Adaptif dan Religius</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="#pendaftaran" class="btn">Daftar Sekarang</a>
+                <a href="#persyaratan" class="btn btn-outline">Lihat Persyaratan</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fitur PMB -->
+    <section class="features fade-in">
+        <div class="container">
+            <h2 class="section-title">Keunggulan Sistem PMB Online</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-house"></i>
+                    </div>
+                    <h3>Pendaftaran Online</h3>
+                    <p>Daftar kapan saja dan dari mana saja tanpa perlu datang ke madrasah. Proses pendaftaran yang mudah dan cepat.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Upload Dokumen Digital</h3>
+                    <p>Upload semua persyaratan dokumen secara digital. Mendukung format PDF, JPG, dan PNG.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Tracking Real-time</h3>
+                    <p>Pantau status pendaftaran Anda secara real-time. Dapatkan notifikasi setiap ada perubahan status.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Pendaftaran -->
+    <section id="pendaftaran" class="registration-form fade-in">
+        <div class="container">
+            <h2 class="section-title">Formulir Pendaftaran Online</h2>
+            <div class="form-container">
+                <div class="form-header">
+                    <h3>Data Calon Murid</h3>
+                    <p>Isi data dengan benar sesuai dokumen yang dimiliki</p>
+                </div>
+                
+                <form id="registrationForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nama" class="required">Nama Lengkap</label>
+                            <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="jk" class="required">Jenis Kelamin</label>
+                            <select id="jk" name="jk" required>
+                                <option value="">Pilih Jenis Kelamin</option>
+                                <option value="L">Laki-laki</option>
+                                <option value="P">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tempatLahir" class="required">Tempat Lahir</label>
+                            <input type="text" id="tempatLahir" name="tempatLahir" required placeholder="Kota kelahiran">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tanggalLahir" class="required">Tanggal Lahir</label>
+                            <input type="date" id="tanggalLahir" name="tanggalLahir" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="namaAyah" class="required">Nama Ayah</label>
+                            <input type="text" id="namaAyah" name="namaAyah" required placeholder="Nama lengkap ayah">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="namaIbu" class="required">Nama Ibu</label>
+                            <input type="text" id="namaIbu" name="namaIbu" required placeholder="Nama lengkap ibu">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="telepon" class="required">No. Telepon/HP</label>
+                            <input type="tel" id="telepon" name="telepon" required placeholder="0812-3456-7890">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="email@contoh.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="alamat" class="required">Alamat Lengkap</label>
+                        <textarea id="alamat" name="alamat" rows="3" required placeholder="Alamat lengkap termasuk RT/RW"></textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="jenjang" class="required">Jenjang Pendidikan</label>
+                            <select id="jenjang" name="jenjang" required>
+                                <option value="">Pilih Jenjang</option>
+                                <option value="MI">Madrasah Ibtidaiyah (MI)</option>
+                                <option value="MTs">Madrasah Tsanawiyah (MTs)</option>
+                                <option value="MA">Madrasah Aliyah (MA)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="kelas" class="required">Kelas yang Dituju</label>
+                            <select id="kelas" name="kelas" required>
+                                <option value="">Pilih Kelas</option>
+                                <option value="1">Kelas 1</option>
+                                <option value="7">Kelas 7</option>
+                                <option value="10">Kelas 10</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-note">
+                        <p><i class="fas fa-info-circle"></i> Setelah mengisi formulir ini, Anda akan mendapatkan nomor pendaftaran yang dapat digunakan untuk tracking status pendaftaran.</p>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <button type="submit" class="btn btn-accent" style="padding: 15px 40px;">
+                            <i class="fas fa-paper-plane"></i> Kirim Pendaftaran
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Persyaratan -->
+    <section id="persyaratan" class="fade-in">
+        <div class="container">
+            <h2 class="section-title">Persyaratan Pendaftaran</h2>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div style="background-color: white; border-radius: 10px; padding: 2.5rem; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                    <h3 style="color: var(--primary); margin-bottom: 1.5rem;">Dokumen yang Harus Disiapkan</h3>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--dark); margin-bottom: 1rem; display: flex; align-items: center;">
+                            <i class="fas fa-file" style="color: var(--secondary); margin-right: 10px;"></i>
+                            Dokumen Umum
+                        </h4>
+                        <ul style="list-style-type: none;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                Fotokopi Akta Kelahiran (2 lembar)
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                Fotokopi Kartu Keluarga (2 lembar)
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                Pas foto 3x4 (4 lembar, background merah)
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--dark); margin-bottom: 1rem; display: flex; align-items: center;">
+                            <i class="fas fa-graduation-cap" style="color: var(--secondary); margin-right: 10px;"></i>
+                            Dokumen Akademik
+                        </h4>
+                        <ul style="list-style-type: none;">
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                Fotokopi Ijazah/SKHUN/Surat Keterangan Lulus
+                            </li>
+                            <li style="padding: 8px 0; border-bottom: 1px solid #eee; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                Rapor/Raport 2 semester terakhir
+                            </li>
+                            <li style="padding: 8px 0; display: flex; align-items: center;">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 10px;"></i>
+                                Sertifikat prestasi (jika ada)
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div style="background-color: rgba(255, 154, 60, 0.1); padding: 1.5rem; border-radius: 8px; margin-top: 2rem;">
+                        <h4 style="color: var(--accent); margin-bottom: 10px; display: flex; align-items: center;">
+                            <i class="fas fa-exclamation-triangle" style="margin-right: 10px;"></i>
+                            Catatan Penting
+                        </h4>
+                        <p>Semua dokumen akan diverifikasi pada saat tes masuk. Pastikan dokumen yang diupload jelas dan terbaca.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jadwal PMB -->
+    <section id="jadwal" class="fade-in" style="background-color: var(--light);">
+        <div class="container">
+            <h2 class="section-title">Jadwal Penerimaan Murid Baru</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="month">Mei</span>
+                        <span class="day">15</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Pembukaan Pendaftaran</h3>
+                        <p>Pendaftaran online dibuka melalui website dan media sosial madrasah. Pendaftaran gelombang pertama.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="month">Juni</span>
+                        <span class="day">20</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Penutupan Gelombang I</h3>
+                        <p>Batas akhir pendaftaran gelombang pertama. Verifikasi dokumen untuk pendaftar gelombang I.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="month">Juli</span>
+                        <span class="day">5</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Tes Seleksi</h3>
+                        <p>Tes akademik dan baca Al-Qur'an untuk calon murid. Dilaksanakan di kampus madrasah.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="month">Juli</span>
+                        <span class="day">15</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Pengumuman Hasil</h3>
+                        <p>Pengumuman murid yang diterima melalui website dan papan pengumuman madrasah.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">
+                        <span class="month">Juli</span>
+                        <span class="day">20-25</span>
+                    </div>
+                    <div class="timeline-content">
+                        <h3>Daftar Ulang</h3>
+                        <p>Pendaftaran ulang dan pembayaran biaya pendidikan untuk murid yang diterima.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tracking -->
+    <section id="tracking" class="tracking-section fade-in">
+        <div class="container">
+            <h2 class="section-title">Cek Status Pendaftaran</h2>
+            
+            <div class="tracking-box">
+                <h3>Masukkan Nomor Pendaftaran</h3>
+                <p>Untuk mengecek status pendaftaran, masukkan nomor pendaftaran yang Anda terima setelah mengisi formulir.</p>
+                
+                <div class="tracking-input">
+                    <input type="text" id="trackingNumber" placeholder="Contoh: PMB-2024-00123">
+                    <button class="btn" id="trackBtn">Cek Status</button>
+                </div>
+                
+                <div id="statusResult" class="status-card">
+                    <div class="status-header">
+                        <h4 id="statusName">Ahmad Fauzi</h4>
+                        <span id="statusBadge" class="status-badge badge-pending">Menunggu Verifikasi</span>
+                    </div>
+                    <div id="statusDetails">
+                        <p><strong>Nomor Pendaftaran:</strong> <span id="detailNo">PMB-2027
